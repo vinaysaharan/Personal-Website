@@ -1,0 +1,26 @@
+export type Person = {
+  slug: string;
+  name: string;
+  role: string;
+  location: string;
+  bio: string;
+  long: string[];
+  expertise: string[];
+  hue: number;
+  linkedin?: string;
+};
+
+export const team: Person[] = [
+  { slug: "mira-okafor", name: "Mira Okafor", role: "Founder & Creative Director", location: "san-francisco", bio: "Mira founded Arcbig in 2016 after a decade leading brand teams at agencies in London and New York.", long: ["Mira started Arcbig with a simple frustration: agencies that made beautiful work nobody could measure, and consultancies that measured everything but made nothing beautiful. She built a studio that does both.", "She leads creative direction across brand and web, and still runs discovery on most new engagements. Her work has been recognised by D&AD, the Webby Awards and Awwwards."], expertise: ["Brand strategy", "Creative direction", "Design systems"], hue: 228, linkedin: "https://www.linkedin.com/in/" },
+  { slug: "theo-brandt", name: "Theo Brandt", role: "Head of Technology & Motion", location: "berlin", bio: "Theo leads engineering and motion, with a background in real-time graphics and creative coding.", long: ["Theo came to Arcbig from a game studio, bringing an obsession with frame budgets to the web. He leads our Three.js, React Three Fiber and Remotion work and sets the performance standards every build must meet.", "He speaks regularly on WebGL performance and contributes to open-source tools for programmatic video."], expertise: ["Three.js and WebGL", "Remotion", "Next.js architecture", "Performance"], hue: 48 },
+  { slug: "jonas-reyes", name: "Jonas Reyes", role: "Head of Growth", location: "austin", bio: "Jonas runs SEO, CRO and analytics, with fifteen years in search and experimentation.", long: ["Jonas has led organic growth for marketplaces, SaaS companies and publishers. At Arcbig he built the growth practice around a simple rule: every recommendation comes with a forecast and a way to check it.", "He writes most of our search and conversion insights and runs the monthly growth reviews with clients."], expertise: ["Technical SEO", "AI search optimisation", "Conversion research", "Analytics"], hue: 160 },
+  { slug: "sofia-lindqvist", name: "Sofia Lindqvist", role: "Head of Content & Social", location: "london", bio: "Sofia leads content strategy, social and video, after editorial roles at media companies in Stockholm and London.", long: ["Sofia brings a newsroom discipline to brand content: a point of view, a deadline and an editor. She leads our content, social and video teams and built the formats system we use with every client.", "Her teams produce everything from long-form guides to monthly shoot days across our cities."], expertise: ["Content strategy", "Social formats", "Video production", "Brand voice"], hue: 350 },
+  { slug: "daniel-achebe", name: "Daniel Achebe", role: "Design Director, Brand", location: "new-york", bio: "Daniel leads identity design, with a portfolio spanning fintech, fashion and cultural institutions.", long: ["Daniel's work balances typographic rigour with expressive colour. He has led identity projects for payment companies, fashion labels and museums, and runs our brand design team across New York and London.", "He teaches identity design part-time and judges international design awards."], expertise: ["Visual identity", "Typography", "Packaging", "Art direction"], hue: 300 },
+  { slug: "hana-sato", name: "Hana Sato", role: "Design Director, Digital", location: "singapore", bio: "Hana leads product and web design, with a focus on research-led UX and design systems.", long: ["Hana has designed products used by millions and marketing sites that won awards, and believes the two disciplines should never have been separated. She leads our UX, UI and web design work across Asia Pacific and the US.", "She runs our usability testing practice and the design system work for larger clients."], expertise: ["UX research", "Product design", "Design systems", "Accessibility"], hue: 190 },
+  { slug: "lucas-moreau", name: "Lucas Moreau", role: "3D & Real-time Lead", location: "london", bio: "Lucas builds the 3D scenes, configurators and shaders behind our most immersive projects.", long: ["Lucas trained in architecture before moving into real-time 3D, which explains why so many of our property and architecture projects run through his team. He builds in Blender, Three.js and React Three Fiber and writes the shaders our scenes depend on.", "His configurator work has shipped for vehicles, furniture and residential towers."], expertise: ["Three.js", "Shaders", "3D modelling", "Configurators"], hue: 32 },
+  { slug: "amara-nwosu", name: "Amara Nwosu", role: "Managing Director", location: "san-francisco", bio: "Amara runs operations, client partnerships and the studio's growth across twelve cities.", long: ["Amara joined Arcbig from a management consultancy and built the delivery model that lets us run fixed-price projects without surprises. She oversees client partnerships and studio operations globally.", "She is the person who makes sure every project has a plan, a budget and a date, and that all three are kept."], expertise: ["Client partnerships", "Delivery", "Operations", "Pricing"], hue: 140 },
+];
+
+export function getPerson(slug: string) {
+  return team.find((p) => p.slug === slug);
+}
