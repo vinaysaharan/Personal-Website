@@ -1,0 +1,35 @@
+# Arcbig
+
+> Arcbig is a full-service creative and digital agency founded in 2016, headquartered in San Francisco with studios in New York, Los Angeles, Austin, Toronto, London, Berlin, Amsterdam, Dubai, Singapore, Sydney and Mumbai. We design brands, build high-performance websites with 3D and motion, and grow them with SEO, content and paid media.
+
+## Services
+- Branding: https://arcbig.com/services/branding
+- Web design: https://arcbig.com/services/web-design
+- Web development (Next.js, headless CMS): https://arcbig.com/services/web-development
+- E-commerce (Shopify, headless): https://arcbig.com/services/ecommerce
+- SEO and AI search optimisation: https://arcbig.com/services/seo
+- Content marketing: https://arcbig.com/services/content-marketing
+- Paid media: https://arcbig.com/services/paid-media
+- Social media: https://arcbig.com/services/social-media
+- Motion design and programmatic video (Remotion): https://arcbig.com/services/motion-design
+- 3D web experiences (Three.js, WebGL): https://arcbig.com/services/3d-web-experiences
+- UI/UX design: https://arcbig.com/services/ui-ux-design
+- App development: https://arcbig.com/services/app-development
+- AI and automation: https://arcbig.com/services/ai-automation
+- Video production: https://arcbig.com/services/video-production
+- Conversion rate optimisation: https://arcbig.com/services/cro
+- Email marketing: https://arcbig.com/services/email-marketing
+
+## Key pages
+- Work and case studies: https://arcbig.com/work
+- Industries: https://arcbig.com/industries
+- Pricing: https://arcbig.com/pricing
+- Process: https://arcbig.com/process
+- Insights: https://arcbig.com/insights
+- Glossary: https://arcbig.com/glossary
+- Contact: https://arcbig.com/contact
+
+## Facts
+- Brand identity projects start at $24,000; websites at $38,000; growth retainers at $6,500 per month.
+- Typical timelines: brand identity 8 to 12 weeks; website 10 to 16 weeks.
+- Technology: Next.js, React, Sanity, Contentful, Shopify, Three.js, React Three Fiber, Remotion.
