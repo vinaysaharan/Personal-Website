@@ -1,14 +1,12 @@
 name: Deploy to GitHub Pages
 
-# The repository's Pages source is "deploy from branch", which publishes the raw
-# repo (README) on every push. GitHub runs that as the "pages build and deployment"
-# workflow; we deploy after it completes so the built site is always the last
-# deployment and wins. Switching Pages to "GitHub Actions" in Settings makes the
-# push trigger below sufficient on its own.
+# The repository's Pages source is "deploy from branch", which republishes the raw
+# repo (README) on every push via GitHub's own "pages build and deployment" run.
+# The deploy job below waits for that run to finish so the built site is always the
+# last deployment and wins. Switching Pages to "GitHub Actions" in Settings removes
+# the need for the wait.
 on:
-  workflow_run:
-    workflows: ["pages build and deployment"]
-    types: [completed]
+  push:
     branches: [master]
   workflow_dispatch:
 
@@ -26,8 +24,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: master
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -58,5 +54,17 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - name: Wait for the branch Pages build to finish
+        if: github.event_name == 'push'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for i in $(seq 1 30); do
+            busy=$(gh run list -R "${{ github.repository }}" --workflow "pages build and deployment" --status in_progress --json databaseId --jq 'length' 2>/dev/null || echo 0)
+            queued=$(gh run list -R "${{ github.repository }}" --workflow "pages build and deployment" --status queued --json databaseId --jq 'length' 2>/dev/null || echo 0)
+            if [ "$busy" = "0" ] && [ "$queued" = "0" ]; then echo "Branch build finished"; break; fi
+            echo "Branch build still running, waiting"; sleep 10
+          done
+          sleep 20
       - id: deployment
         uses: actions/deploy-pages@v4
