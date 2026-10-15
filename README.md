@@ -3,7 +3,7 @@
 A multi-page creative agency site for **Arcbig**, built with Next.js 16, React 19, Tailwind CSS 4, Three.js via React Three Fiber, and Remotion.
 
 - 133 statically generated pages: services, industries, case studies, insights, locations, team, glossary, careers, company and legal pages.
-- SEO built in: per-page metadata, canonical URLs, Open Graph images generated at `/og`, JSON-LD (Organization, WebSite, Service, Article, FAQPage, BreadcrumbList, LocalBusiness, Person, DefinedTerm, JobPosting, HowTo), `sitemap.xml`, `robots.txt`, `llms.txt` for AI search.
+- SEO built in: per-page metadata, canonical URLs, Open Graph images generated per page at build time, JSON-LD (Organization, WebSite, Service, Article, FAQPage, BreadcrumbList, LocalBusiness, Person, DefinedTerm, JobPosting, HowTo), `sitemap.xml`, `robots.txt`, `llms.txt` for AI search.
 - Three.js hero (`components/three/ArcScene.tsx`): decorative WebGL layer loaded after hydration, paused off-screen, static under `prefers-reduced-motion`.
 - Remotion showreel (`remotion/Showreel.tsx`): plays in the browser through `@remotion/player` and renders to MP4 with the Remotion CLI.
 - Motion: one orchestrated hero reveal, CSS scroll-driven reveals (native view timelines, progressive enhancement), React `ViewTransition` between pages.
@@ -16,6 +16,10 @@ npm run dev        # http://localhost:3000
 npm run build && npm start
 npm run lint && npm run typecheck
 ```
+
+## Deploy
+
+Every push to `master` runs `.github/workflows/deploy.yml`, which builds a static export and publishes it to GitHub Pages. The build is a plain static export (`out/`), so it also deploys to Netlify, Vercel, Cloudflare Pages or any static host. When hosting under a sub-path, set `NEXT_PUBLIC_BASE_PATH` (the workflow does this automatically).
 
 ## Remotion
 

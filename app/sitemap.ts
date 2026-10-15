@@ -1,5 +1,7 @@
 import type { MetadataRoute } from "next";
-import { site } from "@/data/site";
+
+export const dynamic = "force-static";
+import { absolute } from "@/lib/seo";
 import { services, industries, work, articles, locations, team, glossary } from "@/lib/content";
 import { careers } from "@/data/pages";
 
@@ -28,7 +30,7 @@ const staticRoutes: { path: string; priority: number; changeFrequency: MetadataR
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
-  const url = (p: string) => `${site.url}${p}`;
+  const url = absolute;
   return [
     ...staticRoutes.map((r) => ({ url: url(r.path), lastModified: now, changeFrequency: r.changeFrequency, priority: r.priority })),
     ...services.map((s) => ({ url: url(`/services/${s.slug}`), lastModified: now, changeFrequency: "monthly" as const, priority: 0.9 })),

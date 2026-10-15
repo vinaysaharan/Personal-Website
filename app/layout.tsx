@@ -6,7 +6,7 @@ import { site } from "@/data/site";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
-import { organizationJsonLd, websiteJsonLd } from "@/lib/seo";
+import { absolute, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 
 const display = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -46,7 +46,6 @@ export const metadata: Metadata = {
     url: site.url,
     title: `${site.name} | Creative Agency for Branding, Web Design, 3D & Growth`,
     description: site.description,
-    images: [{ url: "/og", width: 1200, height: 630, alt: `${site.name} creative agency` }],
   },
   twitter: {
     card: "summary_large_image",
@@ -54,16 +53,15 @@ export const metadata: Metadata = {
     creator: "@arcbig",
     title: `${site.name} | Creative Agency`,
     description: site.description,
-    images: ["/og"],
   },
   robots: {
     index: true,
     follow: true,
     googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
   },
-  alternates: { canonical: site.url },
-  icons: { icon: "/icon.svg", apple: "/apple-icon.png" },
-  manifest: "/manifest.webmanifest",
+  alternates: { canonical: absolute("/") },
+  icons: { icon: absolute("/icon.svg"), apple: absolute("/apple-icon.png") },
+  manifest: absolute("/manifest.webmanifest"),
   category: "business",
 };
 

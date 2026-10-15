@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import { site } from "@/data/site";
 import type { FAQ } from "@/data/services";
 
-export const absolute = (path: string) => new URL(path, site.url).toString();
-
-export function ogImage(title: string, kicker?: string) {
-  const params = new URLSearchParams({ title });
-  if (kicker) params.set("kicker", kicker);
-  return `/og?${params.toString()}`;
+/**
+ * Absolute URL that keeps any base path present in the site URL (e.g. GitHub Pages)
+ * and matches the exported trailing-slash URL shape so canonicals never redirect.
+ */
+export function absolute(path: string) {
+  const p = path.startsWith("/") ? path : `/${path}`;
+  const shaped = /\.[a-z0-9]+$/i.test(p) || p.endsWith("/") ? p : `${p}/`;
+  return `${site.url.replace(/\/+$/, "")}${shaped}`;
 }
 
 type PageMeta = {
@@ -25,7 +27,6 @@ type PageMeta = {
 
 export function buildMetadata(m: PageMeta): Metadata {
   const url = absolute(m.path);
-  const image = ogImage(m.title, m.kicker);
   return {
     title: m.title,
     description: m.description,
@@ -38,12 +39,11 @@ export function buildMetadata(m: PageMeta): Metadata {
       title: m.title,
       description: m.description,
       siteName: site.name,
-      images: [{ url: image, width: 1200, height: 630, alt: m.title }],
       ...(m.type === "article"
         ? { publishedTime: m.publishedTime, modifiedTime: m.modifiedTime ?? m.publishedTime, authors: m.authors }
         : {}),
     },
-    twitter: { card: "summary_large_image", title: m.title, description: m.description, images: [image] },
+    twitter: { card: "summary_large_image", title: m.title, description: m.description },
   };
 }
 
@@ -137,7 +137,6 @@ export function articleJsonLd(a: { title: string; description: string; path: str
     datePublished: a.date,
     dateModified: a.date,
     keywords: a.keywords.join(", "),
-    image: absolute(ogImage(a.title)),
     author: { "@type": "Person", name: a.author.name, url: absolute(a.author.path) },
     publisher: { "@id": `${site.url}/#organization` },
   };

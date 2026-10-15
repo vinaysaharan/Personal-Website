@@ -1,14 +1,13 @@
 import { ImageResponse } from "next/og";
-import type { NextRequest } from "next/server";
 
-export const runtime = "edge";
+export const ogSize = { width: 1200, height: 630 };
+export const ogContentType = "image/png";
 
-export function GET(req: NextRequest) {
-  const { searchParams } = new URL(req.url);
-  const title = (searchParams.get("title") ?? "Arcbig. Ideas, built big.").slice(0, 120);
-  const kicker = (searchParams.get("kicker") ?? "Creative agency").slice(0, 60);
+/** Shared Open Graph card used by every segment's opengraph-image file. */
+export function renderOg(rawTitle: string, rawKicker = "Creative agency") {
+  const title = rawTitle.replace(/\s*\|\s*Arcbig$/, "").slice(0, 120);
+  const kicker = rawKicker.slice(0, 60);
   const size = title.length > 70 ? 56 : title.length > 40 ? 72 : 92;
-
   return new ImageResponse(
     (
       <div
@@ -39,6 +38,6 @@ export function GET(req: NextRequest) {
         </div>
       </div>
     ),
-    { width: 1200, height: 630 }
+    ogSize
   );
 }

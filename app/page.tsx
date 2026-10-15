@@ -9,14 +9,13 @@ import { sortedArticles } from "@/lib/content";
 import { HeroScene } from "@/components/three/HeroScene";
 import { ShowreelPlayer } from "@/components/ShowreelPlayer";
 import { JsonLd } from "@/components/JsonLd";
-import { faqJsonLd, ogImage } from "@/lib/seo";
+import { absolute, faqJsonLd } from "@/lib/seo";
 import { Cta, FaqList, Marquee, SectionHeading, ServiceCard, StatRow, WorkCard, ArticleCard } from "@/components/ui";
 
 export const metadata: Metadata = {
   title: `${site.name} | Creative Agency for Branding, Web Design, 3D & Growth`,
   description: site.description,
-  alternates: { canonical: site.url },
-  openGraph: { images: [{ url: ogImage("Ideas, built big.", "Creative agency"), width: 1200, height: 630 }] },
+  alternates: { canonical: absolute("/") },
 };
 
 export default function HomePage() {
