@@ -1,7 +1,14 @@
 name: Deploy to GitHub Pages
 
+# The repository's Pages source is "deploy from branch", which publishes the raw
+# repo (README) on every push. GitHub runs that as the "pages build and deployment"
+# workflow; we deploy after it completes so the built site is always the last
+# deployment and wins. Switching Pages to "GitHub Actions" in Settings makes the
+# push trigger below sufficient on its own.
 on:
-  push:
+  workflow_run:
+    workflows: ["pages build and deployment"]
+    types: [completed]
     branches: [master]
   workflow_dispatch:
 
@@ -19,18 +26,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: master
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
-      - name: Use GitHub Actions as the Pages source
+      - name: Report Pages source
         env:
           GH_TOKEN: ${{ github.token }}
-        run: |
-          gh api -X PUT "repos/${{ github.repository }}/pages" -f build_type=workflow \
-            && echo "Pages source set to GitHub Actions" \
-            || echo "::warning::Could not update Pages source; set it to GitHub Actions under Settings > Pages"
-          gh api "repos/${{ github.repository }}/pages" --jq '"build_type=\(.build_type) url=\(.html_url)"' || true
+        run: gh api "repos/${{ github.repository }}/pages" --jq '"build_type=\(.build_type) url=\(.html_url)"' || true
       - name: Configure Pages
         id: pages
         uses: actions/configure-pages@v5
