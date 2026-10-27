@@ -19,7 +19,7 @@ npm run lint && npm run typecheck
 
 ## Deploy
 
-Every push to `master` runs `.github/workflows/deploy.yml`, which builds a static export and publishes it to GitHub Pages. The build is a plain static export (`out/`), so it also deploys to Netlify, Vercel, Cloudflare Pages or any static host. When hosting under a sub-path, set `NEXT_PUBLIC_BASE_PATH` (the workflow does this automatically).
+The site is currently not published. `npm run build` produces a plain static export in `out/` that deploys to GitHub Pages, Netlify, Vercel, Cloudflare Pages or any static host. When hosting under a sub-path, set `NEXT_PUBLIC_BASE_PATH`.
 
 ## Remotion
 
